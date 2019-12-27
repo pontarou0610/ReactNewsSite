@@ -37,7 +37,7 @@ class App extends Component {
                   <Card>
                     <Card.Img variant="top" src="../logo512.png" />
                     <Card.Body>
-                      <Card.Title>Card Title</Card.Title>
+                      <Card.Title>Card Title1</Card.Title>
                       <Card.Text>
                         Card Text
                       </Card.Text>
@@ -49,7 +49,7 @@ class App extends Component {
                   <Card>
                     <Card.Img variant="top" src="../logo512.png" />
                     <Card.Body>
-                      <Card.Title>Card Title</Card.Title>
+                      <Card.Title>Card Title2</Card.Title>
                       <Card.Text>
                         Card Text
                       </Card.Text>
@@ -60,7 +60,7 @@ class App extends Component {
                 <Col md={3}> <Card>
                   <Card.Img variant="top" src="../logo512.png" />
                   <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>Card Title3</Card.Title>
                     <Card.Text>
                       Card Text
                       </Card.Text>
@@ -70,7 +70,7 @@ class App extends Component {
                 <Col md={3}> <Card>
                   <Card.Img variant="top" src="../logo512.png" />
                   <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>Card Title4</Card.Title>
                     <Card.Text>
                       Card Text
                       </Card.Text>
