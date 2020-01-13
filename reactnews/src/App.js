@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './header.js';
+import Footer from './footer.js';
+import TabComponent from './tabComponent';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col, Card, Tabs, Tab, Button } from 'react-bootstrap';
+import { Col, Card } from 'react-bootstrap';
 
 import { fetch } from './Api.js';
 
@@ -14,83 +17,38 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    const news = fetch()
-    console.log(news)
+  async componentDidMount() {
+    const news = await fetch()
+    this.setState({ 'news': news })
+
   }
+
+  tabClick = async (eventKey) => {
+    const news = await fetch(eventKey)
+    this.setState({ 'news': news })
+  }
+
   render() {
+    const newsCards = this.state.news.map((val, index) =>
+      <Col xs="12" sm="6" md="4" lg="3" key={index}>
+        <a href={val.url} target='blank'>
+          <Card className=''>
+            <Card.Img className='card-image' variant="top" src={val.urlToImage} />
+            <Card.Body>
+              <Card.Title className='card-title'>{val.title}</Card.Title>
+              <Card.Text className='card-text'>{val.description}</Card.Text>
+            </Card.Body>
+          </Card>
+        </a>
+      </Col>
+    )
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <div>
-            <h1 className="header-title">React News</h1>
-            <p className="header-discription">Powerd by NewsApi</p>
-          </div>
-
-        </header>
+        <Header />
         <main className="main">
-          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-            <Tab eventKey="home" title="Home">
-              <Row>
-                <Col md={3}>
-                  <Card>
-                    <Card.Img variant="top" src="../logo512.png" />
-                    <Card.Body>
-                      <Card.Title>Card Title1</Card.Title>
-                      <Card.Text>
-                        Card Text
-                      </Card.Text>
-                      <Button variant="primary">GO</Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col md={3}>
-                  <Card>
-                    <Card.Img variant="top" src="../logo512.png" />
-                    <Card.Body>
-                      <Card.Title>Card Title2</Card.Title>
-                      <Card.Text>
-                        Card Text
-                      </Card.Text>
-                      <Button variant="primary">GO</Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col md={3}> <Card>
-                  <Card.Img variant="top" src="../logo512.png" />
-                  <Card.Body>
-                    <Card.Title>Card Title3</Card.Title>
-                    <Card.Text>
-                      Card Text
-                      </Card.Text>
-                    <Button variant="primary">GO</Button>
-                  </Card.Body>
-                </Card></Col>
-                <Col md={3}> <Card>
-                  <Card.Img variant="top" src="../logo512.png" />
-                  <Card.Body>
-                    <Card.Title>Card Title4</Card.Title>
-                    <Card.Text>
-                      Card Text
-                      </Card.Text>
-                    <Button variant="primary">GO</Button>
-                  </Card.Body>
-                </Card></Col>
-              </Row>
-            </Tab>
-            <Tab eventKey="profile" title="Profile">
-              Profile
-                     </Tab>
-            <Tab eventKey="contact" title="Contact" disabled>
-              Contact
-          </Tab>
-          </Tabs>
+          <TabComponent newsCards={newsCards} tabClick={this.tabClick} />
         </main>
-        <footer className="footer">
-          <img src={logo} className="footer-logo" alt="logo" />
-          <p className="footer-discription">React News by RemoteWorkChannel</p>
-        </footer>
+        <Footer />
       </div>
     );
   }
